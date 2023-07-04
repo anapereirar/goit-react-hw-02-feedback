@@ -1,0 +1,39 @@
+// One component solution
+import propTypes from 'prop-types';
+import { Component } from 'react';
+
+class FeedbackSolution extends Component {
+  constructor() {
+    super();
+    this.state = {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
+  }
+
+  render() {
+    const { good, neutral, bad } = this.state;
+
+    const countTotalFeedback = () => good + neutral + bad;
+    const countPositiveFeedbackPercentage = () => good * 100/countTotalFeedback()
+   
+    return (
+      <div>
+        <h3>Please leave feedback</h3>
+        <button onClick={() => this.setState({ good: good +1 })}>Good</button>
+        <button onClick={() => this.setState({ neutral: neutral +1 })}>Neutral</button>
+        <button onClick={() => this.setState({ bad: bad +1 })}>Bad</button>
+
+        <h3>Statistics</h3>
+        <p>Good: {good}</p>
+        <p>Neutral: {neutral} </p>
+        <p>Bad: {bad} </p>
+        <p>Total: {countTotalFeedback()}</p>
+        <p>Positive feedback:{Math.round(countPositiveFeedbackPercentage())}%</p>
+      </div>
+    );
+  }
+}
+
+export default FeedbackSolution;
